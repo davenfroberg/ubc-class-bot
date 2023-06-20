@@ -3,6 +3,7 @@ import responses
 from discord import app_commands
 import requests
 import json
+import config
 
 
 async def send_message(message, user_message, is_private):
@@ -13,7 +14,7 @@ async def send_message(message, user_message, is_private):
         print(e)
 
 def run_discord_bot():
-    TOKEN = ''
+    TOKEN = config.TOKEN
     intents = discord.Intents.default()  
     intents.message_content = True
     client = discord.Client(intents=intents)
