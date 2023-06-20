@@ -1,18 +1,10 @@
 import discord
 import discord.ui
-import responses
 from discord import app_commands
 import requests
 import json
 import config
 
-
-async def send_message(message, user_message, is_private):
-    try:
-        response = responses.handle_response(user_message)
-        await message.author.send(response) if is_private else await message.channel.send(response)
-    except Exception as e:
-        print(e)
 
 def run_discord_bot():
     TOKEN = config.TOKEN
@@ -22,7 +14,7 @@ def run_discord_bot():
 
     tree = app_commands.CommandTree(client)
 
-    @tree.command(name = "ubcinfo", description = "Get Info on a UBC Course", guild=discord.Object(id=1004543455332147351)) #Add the guild ids in which the slash command will appear. If it should be in all, remove the argument, but note that it will take some time (up to an hour) to register the command if it's for all guilds.
+    @tree.command(name = "ubcinfo", description = "Get Info on a UBC Course") #Add the guild ids in which the slash command will appear. If it should be in all, remove the argument, but note that it will take some time (up to an hour) to register the command if it's for all guilds.
     async def first_command(interaction: discord.Interaction, course_code: str, course_number: str):
         code = course_code.upper()
         grade_api = f'https://ubcgrades.com/api/v3/course-statistics/UBCV/{code}/{course_number}'
@@ -43,8 +35,7 @@ def run_discord_bot():
 
     @client.event
     async def on_ready():
-        await tree.sync(guild=discord.Object(id=1004543455332147351))
+        await tree.sync()
         print(f'{client.user} is now running!')
-    
     
     client.run(TOKEN)
