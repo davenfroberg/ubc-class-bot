@@ -4,18 +4,25 @@ from discord import app_commands
 import requests
 import json
 import config
+import ratemyprofessor as rmp
+import asyncio
+from discord.ui import Select, View
 
 
 def run_discord_bot():
     TOKEN = config.TOKEN
+
     session = '2022W' #to get first section in this session
+    school_name = "University of British Columbia"
+    school = rmp.get_school_by_name(school_name)
+
     intents = discord.Intents.default()  
     intents.message_content = True
     client = discord.Client(intents=intents)
 
     tree = app_commands.CommandTree(client)
 
-    @tree.command(name = "ubcinfo", description = "Get Info on a UBC Course")
+    @tree.command(name = "course", description = "Get Info on a UBC Course")
     async def first_command(interaction: discord.Interaction, course_code: str, course_number: str):
         code = course_code.upper()
 
@@ -43,6 +50,82 @@ def run_discord_bot():
             )
         else:
             await interaction.response.send_message(f"{code} {course_number} doesn't seem to exist!")
+    
+    @tree.command(name = "prof", description = "Get RateMyProfessors Info on a UBC Professor")
+    async def second_command(interaction: discord.Interaction, name: str):
+        
+        async def send_prof(interaction, professor, from_list=False):
+            rating = "{:.1f}".format(professor.rating)
+            difficulty = "{:.1f}".format(professor.difficulty)
+            rmp_link = f'https://www.ratemyprofessors.com/professor/{professor.id}'
+            
+            embed = discord.Embed(
+                        title=f'{professor.name}',
+                        description=f"""
+                        *{professor.department}*\n
+                        Rating: {rating}
+                        Difficulty: {difficulty}
+                        Total Ratings: {professor.num_ratings}
+                        [See more on RateMyProfessors]({rmp_link})
+                        """
+                    )
+
+            await asyncio.sleep(1)
+
+            if (not from_list):
+                await interaction.followup.send(
+                    embed=embed
+                )
+
+            else:
+                await interaction.response.send_message(
+                    embed=embed
+                )
+
+        await interaction.response.defer()
+        
+        try:
+            professors = rmp.get_professors_by_school_and_name(school, name) #this is a hella slow API but it works
+           
+            if (len(professors) == 0):
+                    raise Exception("No professors by that name found!")
+            
+            elif len(professors) == 1:
+                await send_prof(interaction, professors[0])
+                
+            else:
+                options = []
+                i = 0
+                for professor in professors:
+                     options.append(discord.SelectOption(
+                          label=f"{professor.name}",
+                          value=i,
+                          description=f"{professor.department}"))
+                     i+=1
+                     
+                select = Select(options=options)
+
+                async def callback(interaction):
+                     await send_prof(interaction, professors[int(select.values[0])], True)
+                     await message.delete()
+                
+                select.callback = callback
+
+                view = View()
+                view.add_item(select)
+
+                message = await interaction.followup.send(
+                    embed=discord.Embed(
+                        title="Multiple Professors Found!",
+                        description="Please select one of the following professors:"
+                    ), 
+                    view=view
+                )
+                
+        except Exception as e:
+            print(e)
+            print(f'Error looking up {name}')
+            await interaction.followup.send(f'There was an error! Please try again!')
 
     @client.event
     async def on_ready():
