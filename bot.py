@@ -40,8 +40,10 @@ def run_discord_bot():
             title = api_json['course_title']
             ssc = f'https://courses.students.ubc.ca/cs/courseschedule?pname=subjarea&tname=subj-course&dept={code}&course={course_number}'
             
-            #ubcgrades no longer has overall section so it puts you on the first available section
+            #ubcgrades no longer has the overall section so it puts you on the first available section
             ubc_grades = f'https://ubcgrades.com/#UBCV-{session}-{code}-{course_number}-{first_section}' 
+
+            #TODO: figure out what the average represents and maybe make my own average
             await interaction.response.send_message(
                 embed=discord.Embed(
                     title=f'{code} {course_number}: {title}',
@@ -73,32 +75,31 @@ def run_discord_bot():
             await asyncio.sleep(1)
 
             if (not from_list):
-                await interaction.followup.send(
-                    embed=embed
-                )
-
+                await interaction.followup.send(embed=embed, ephemeral=False)
             else:
-                await interaction.response.send_message(
-                    embed=embed
-                )
+                await interaction.response.send_message(embed=embed, ephemeral=False)
 
-        await interaction.response.defer()
+        await interaction.response.defer(ephemeral=True) #have to defer the response otherwise will timeout due to slow API call
         
         try:
-            professors = rmp.get_professors_by_school_and_name(school, name) #this is a hella slow API but it works
+            professors = rmp.get_professors_by_school_and_name(school, name) #this is a very slow API call
            
             if (len(professors) == 0):
-                    raise Exception("No professors by that name found!")
-            
+                await interaction.followup.send(
+                    embed=discord.Embed
+                    (
+                        title="No professor with that name found!",
+                        description="Please try again."
+                    ))
+            #TODO, figure out how to make this send_prof call non ephemeral
             elif len(professors) == 1:
                 await send_prof(interaction, professors[0])
-                
             else:
                 options = []
                 i = 0
                 for professor in professors:
                      options.append(discord.SelectOption(
-                          label=f"{professor.name}",
+                          label=f"{professor.name}: {professor.num_ratings} ratings",
                           value=i,
                           description=f"{professor.department}"))
                      i+=1
@@ -119,13 +120,13 @@ def run_discord_bot():
                         title="Multiple Professors Found!",
                         description="Please select one of the following professors:"
                     ), 
-                    view=view
+                    view=view, ephemeral=True
                 )
                 
         except Exception as e:
             print(e)
             print(f'Error looking up {name}')
-            await interaction.followup.send(f'There was an error! Please try again!')
+            await interaction.followup.send(f'There was an internal error! Please try again!')
 
     @client.event
     async def on_ready():
