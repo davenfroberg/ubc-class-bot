@@ -83,7 +83,8 @@ def run_discord_bot():
         
         try:
             professors = rmp.get_professors_by_school_and_name(school, name) #this is a very slow API call
-           
+            professors = list(filter(lambda x: x.school.name == school_name, professors)) #filter out any profs that don't go to the proper school
+            
             if (len(professors) == 0):
                 await interaction.followup.send(
                     embed=discord.Embed
@@ -95,6 +96,7 @@ def run_discord_bot():
             elif len(professors) == 1:
                 await send_prof(interaction, professors[0])
             else:
+                professors.sort(key=lambda x: x.num_ratings, reverse=True) #sort in descending order of num_ratings
                 options = []
                 i = 0
                 for professor in professors:
