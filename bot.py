@@ -36,7 +36,7 @@ def run_discord_bot():
             api_json = json.loads(grade_request.content)
             first_section = str(json.loads(sections_request.content)[0])
 
-            average = round(api_json['average'], 2)
+            average = round(float(api_json['average_past_5_yrs']), 2)
             title = api_json['course_title']
             ssc = f'https://courses.students.ubc.ca/cs/courseschedule?pname=subjarea&tname=subj-course&dept={code}&course={course_number}'
             
@@ -47,7 +47,7 @@ def run_discord_bot():
             await interaction.response.send_message(
                 embed=discord.Embed(
                     title=f'{code} {course_number}: {title}',
-                    description=f'Average: {average}% \n[SSC Link]({ssc}) \n[UBCGrades Link]({ubc_grades})',
+                    description=f'5 Year Rolling Average: {average}% \n[SSC Link]({ssc}) \n[UBCGrades Link]({ubc_grades})',
                 )
             )
         else:
