@@ -1,13 +1,12 @@
 import discord
 import discord.ui
 from discord import app_commands
+from discord.ui import Select, View
 import requests
 import json
+import asyncio
 import config
 import ratemyprofessor as rmp
-import asyncio
-from discord.ui import Select, View
-
 
 def run_discord_bot():
     TOKEN = config.TOKEN
@@ -43,7 +42,6 @@ def run_discord_bot():
             #ubcgrades no longer has the overall section so it puts you on the first available section
             ubc_grades = f'https://ubcgrades.com/#UBCV-{session}-{code}-{course_number}-{first_section}' 
 
-            #TODO: figure out what the average represents and maybe make my own average
             await interaction.response.send_message(
                 embed=discord.Embed(
                     title=f'{code} {course_number}: {title}',
@@ -129,6 +127,36 @@ def run_discord_bot():
             print(e)
             print(f'Error looking up {name}')
             await interaction.followup.send(f'There was an internal error! Please try again!')
+    
+    @tree.command(name = "building", description = "Get Information on a UBC Building")
+    async def third_command(interaction: discord.Interaction, code: str):
+        building_code = code.upper()
+        building_api = f'https://mg3xyuefal.execute-api.us-east-2.amazonaws.com/ubcbuildings/building?code={building_code}'
+        request = requests.get(building_api)
+        print(request.status_code)
+        if request.status_code == 200:
+            building_json = json.loads(request.content)
+            name = building_json['name']
+            address = building_json['address']
+            #use this link for directions between buildings, for next command
+            #maps_link = f'https://www.google.com/maps/dir/?api=1&origin={address.replace(" ", "+")}+Vancouver,+BC&destination=UBC+Fountain&travelmode=walking'
+            maps_link=f'[{address}](https://www.google.com/maps?q={address.replace(" ", "+")}+Vancouver,+BC)'
+            await interaction.response.send_message(
+                embed=discord.Embed(
+                    title=f'{building_code}',
+                    description=f'''
+                    *{name}*\n
+                    {maps_link}''',
+                )
+            )
+        else:
+            await interaction.response.send_message(
+                embed=discord.Embed
+                (
+                    title="No building with that code found!",
+                    description="Please try again."
+                ))
+
 
     @client.event
     async def on_ready():

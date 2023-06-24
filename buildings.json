@@ -1,0 +1,352 @@
+[
+    {
+        "name": "Allard Hall",
+        "code": "ALRD",
+        "address": "1822 East Mall"
+    },
+    {
+        "name": "Anthropology and Sociology",
+        "code": "ANSO",
+        "address": "6303 North West Marine Drive"
+    },
+    {
+        "name": "Aquatic Ecosystems Research Laboratory",
+        "code": "AERL",
+        "address": "2202 Main Mall"
+    },
+    {
+        "name": "Asian Centre",
+        "code": "ACEN",
+        "address": "1871 West Mall"
+    },
+    {
+        "name": "Auditorium Annex",
+        "code": "AUDX",
+        "address": "1924 West Mall"
+    },
+    {
+        "name": "B.C. Binnings Studio",
+        "code": "BINN",
+        "address": "6373 University Boulevard"
+    },
+    {
+        "name": "Biological Sciences",
+        "code": "BIOL",
+        "address": "6270 University Boulevard"
+    },
+    {
+        "name": "Buchanan",
+        "code": "BUCH",
+        "address": "1866 Main Mall"
+    },
+    {
+        "name": "Buchanan Tower",
+        "code": "BUTO",
+        "address": "1873 East Mall"
+    },
+    {
+        "name": "Centre for Comparative Medicine",
+        "code": "CCM",
+        "address": "4145 Wesbrook Mall"
+    },
+    {
+        "name": "Centre for Interactive Research on Sustainability",
+        "code": "CIRS",
+        "address": "2260 West Mall"
+    },
+    {
+        "name": "Chan Centre",
+        "code": "CHAN",
+        "address": "6265 Crescent Road"
+    },
+    {
+        "name": "Chan Gunn Pavilion",
+        "code": "GUNN",
+        "address": "2553 Wesbrook Mall"
+    },
+    {
+        "name": "Chemical and Biological Engineering Building",
+        "code": "CHBE",
+        "address": "2360 East Mall V6T 1Z3"
+    },
+    {
+        "name": "Chemistry",
+        "code": "CHEM",
+        "address": "2036 Main Mall"
+    },
+    {
+        "name": "Civil and Mechanical Engineering",
+        "code": "CEME",
+        "address": "6250 Applied Science Lane"
+    },
+    {
+        "name": "Coal and Mineral Processing Laboratory",
+        "code": "MINL",
+        "address": "2332 West Mall"
+    },
+    {
+        "name": "D.H. Copp",
+        "code": "COPP",
+        "address": "2146 Health Sciences Mall"
+    },
+    {
+        "name": "David Lam Management Research Centre",
+        "code": "DLAM",
+        "address": "2033 Main Mall V6T 1Z2"
+    },
+    {
+        "name": "Dorothy Somerset Studio",
+        "code": "DSOM",
+        "address": "6361 University Blvd"
+    },
+    {
+        "name": "Douglas Kenny",
+        "code": "KENN",
+        "address": "2136 West Mall"
+    },
+    {
+        "name": "Earth and Ocean Sciences",
+        "code": "EOS",
+        "address": "6339 Stores Road"
+    },
+    {
+        "name": "Earth Sciences Building",
+        "code": "ESB",
+        "address": "2207 Main Mall"
+    },
+    {
+        "name": "Engineering Student Centre",
+        "code": "ESC",
+        "address": "2335 Engineering Road"
+    },
+    {
+        "name": "Food, Nutrition and Health",
+        "code": "FNH",
+        "address": "2205 East Mall"
+    },
+    {
+        "name": "Forest Sciences Centre",
+        "code": "FSC",
+        "address": "2424 Main Mall"
+    },
+    {
+        "name": "Frank Forward",
+        "code": "FORW",
+        "address": "6350 Stores Road"
+    },
+    {
+        "name": "Frederic Lasserre",
+        "code": "LASR",
+        "address": "6333 Memorial Road"
+    },
+    {
+        "name": "Frederic Wood Theatre",
+        "code": "FRWO",
+        "address": "6354 Crescent Road"
+    },
+    {
+        "name": "Friedman Building",
+        "code": "FRDM",
+        "address": "2177 Wesbrook Mall V6T 1Z3"
+    },
+    {
+        "name": "Geography",
+        "code": "GEOG",
+        "address": "1984 West Mall"
+    },
+    {
+        "name": "George Cunningham",
+        "code": "CUNN",
+        "address": "2146 East Mall"
+    },
+    {
+        "name": "Hebb",
+        "code": "HEBB",
+        "address": "2045 East Mall"
+    },
+    {
+        "name": "Hennings",
+        "code": "HENN",
+        "address": "6224 Agricultural Road"
+    },
+    {
+        "name": "Henry Angus",
+        "code": "ANGU",
+        "address": "2053 Main Mall"
+    },
+    {
+        "name": "Hugh Dempster Pavilion",
+        "code": "DMP",
+        "address": "6245 Agronomy Road V6T 1Z4"
+    },
+    {
+        "name": "Indian Residential School History and Dialogue Centre",
+        "code": "IRSC",
+        "address": "1985 Learners' Walk"
+    },
+    {
+        "name": "Institute for Computing (ICICS/CS)",
+        "code": "ICCS",
+        "address": "2366 Main Mall"
+    },
+    {
+        "name": "Irving K Barber Learning Centre",
+        "code": "IBLC",
+        "address": "1961 East Mall V6T 1Z1"
+    },
+    {
+        "name": "J.B. MacDonald",
+        "code": "MCDN",
+        "address": "2199 West Mall"
+    },
+    {
+        "name": "Jack Bell Building for the School of Social Work",
+        "code": "SOWK",
+        "address": "2080 West Mall"
+    },
+    {
+        "name": "Landscape Architecture Annex",
+        "code": "LAX",
+        "address": "2371 Main Mall"
+    },
+    {
+        "name": "Leonard S. Klinck (also known as CSCI)",
+        "code": "LSK",
+        "address": "6356 Agricultural Road"
+    },
+    {
+        "name": "Library PARC@UBC",
+        "code": "PARC",
+        "address": "6049 Nurseries Road"
+    },
+    {
+        "name": "Life Sciences Centre",
+        "code": "LSC",
+        "address": "2350 Health Sciences Mall"
+    },
+    {
+        "name": "MacLeod",
+        "code": "MCLD",
+        "address": "2356 Main Mall"
+    },
+    {
+        "name": "MacMillan",
+        "code": "MCML",
+        "address": "2357 Main Mall"
+    },
+    {
+        "name": "Mathematics",
+        "code": "MATH",
+        "address": "1984 Mathematics Road"
+    },
+    {
+        "name": "Mathematics Annex",
+        "code": "MATX",
+        "address": "1986 Mathematics Road"
+    },
+    {
+        "name": "Medical Sciences Block C",
+        "code": "MEDC",
+        "address": "2176 Health Sciences Mall"
+    },
+    {
+        "name": "Michael Smith Laboratories",
+        "code": "MSL",
+        "address": "2185 East Mall"
+    },
+    {
+        "name": "Music",
+        "code": "MUSC",
+        "address": "6361 Memorial Road"
+    },
+    {
+        "name": "Neville Scarfe",
+        "code": "SCRF",
+        "address": "2125 Main Mall"
+    },
+    {
+        "name": "Old Auditorium",
+        "code": "AUDI",
+        "address": "6344 Memorial Road"
+    },
+    {
+        "name": "P. A. Woodward Instructional Resources Centre",
+        "code": "IRC",
+        "address": "2194 Health Sciences Mall"
+    },
+    {
+        "name": "Pharmaceutical Sciences Building",
+        "code": "PHRM",
+        "address": "2405 Wesbrook Mall"
+    },
+    {
+        "name": "Ponderosa Annex E",
+        "code": "PONE",
+        "address": "2034 Lower Mall"
+    },
+    {
+        "name": "Ponderosa Office Annex F",
+        "code": "PONF",
+        "address": "2008 Lower Mall"
+    },
+    {
+        "name": "Robert F. Osborne Centre",
+        "code": "OSB2",
+        "address": "6108 Thunderbird Boulevard"
+    },
+    {
+        "name": "Student Recreation Centre",
+        "code": "SRC",
+        "address": "6000 Student Union Blvd"
+    },
+    {
+        "name": "The Brimacombe Building",
+        "code": "BRIM",
+        "address": "2355 East Mall"
+    },
+    {
+        "name": "The Leon and Thea Koerner University Centre",
+        "code": "UCEN",
+        "address": "6331 Crescent Road V6T 1Z1"
+    },
+    {
+        "name": "Theatre-Film Production Building",
+        "code": "TFPB",
+        "address": "6358 University Blvd, V6T 1Z4"
+    },
+    {
+        "name": "UBC Farm - Yurt",
+        "code": "YURT",
+        "address": "3465 Ross Drive"
+    },
+    {
+        "name": "UBC Hospital - Koerner Pavilion",
+        "code": "KPAV",
+        "address": "2211 Wesbrook Mall"
+    },
+    {
+        "name": "War Memorial Gymnasium",
+        "code": "MGYM",
+        "address": "6081 University Blvd"
+    },
+    {
+        "name": "Wayne and William White Engineering Design Centre",
+        "code": "EDC",
+        "address": "2345 East Mall"
+    },
+    {
+        "name": "Wesbrook",
+        "code": "WESB",
+        "address": "6174 University Boulevard"
+    },
+    {
+        "name": "West Mall Annex",
+        "code": "WMAX",
+        "address": "1933 West Mall"
+    },
+    {
+        "name": "West Mall Swing Space",
+        "code": "SWNG",
+        "address": "2175 West Mall V6T 1Z4"
+    }
+]
