@@ -270,6 +270,11 @@
         "address": "6344 Memorial Road"
     },
     {
+        "name": "Orchard Commons",
+        "code": "ORCH",
+        "address": "6363 Agronomy Road"
+    },
+    {
         "name": "P. A. Woodward Instructional Resources Centre",
         "code": "IRC",
         "address": "2194 Health Sciences Mall"

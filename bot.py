@@ -8,8 +8,10 @@ import asyncio
 import config
 import ratemyprofessor as rmp
 
+
 def run_discord_bot():
     TOKEN = config.TOKEN
+    prof_cache = {}
 
     session = '2022W' #to get first section in this session
     school_name = "University of British Columbia"
@@ -80,7 +82,16 @@ def run_discord_bot():
         await interaction.response.defer(ephemeral=True) #have to defer the response otherwise will timeout due to slow API call
         
         try:
-            professors = rmp.get_professors_by_school_and_name(school, name) #this is a very slow API call
+            professors = []
+            prof_name = name.lower()
+
+            #if the query is already cached, don't make a slow API call again
+            if prof_name in prof_cache:
+                professors = prof_cache.get(prof_name)
+            else:
+                professors = rmp.get_professors_by_school_and_name(school, prof_name) #this is a very slow API call
+                prof_cache[prof_name] = professors #cache the api result by search term to prevent slow api calls in future
+            
             professors = list(filter(lambda x: x.school.name == school_name, professors)) #filter out any profs that don't go to the proper school
             
             if (len(professors) == 0):
@@ -138,8 +149,7 @@ def run_discord_bot():
             building_json = json.loads(request.content)
             name = building_json['name']
             address = building_json['address']
-            #use this link for directions between buildings, for next command
-            #maps_link = f'https://www.google.com/maps/dir/?api=1&origin={address.replace(" ", "+")}+Vancouver,+BC&destination=UBC+Fountain&travelmode=walking'
+           
             maps_link=f'[{address}](https://www.google.com/maps?q={address.replace(" ", "+")}+Vancouver,+BC)'
             await interaction.response.send_message(
                 embed=discord.Embed(
@@ -155,6 +165,57 @@ def run_discord_bot():
                 (
                     title="No building with that code found!",
                     description="Please try again."
+                ))
+            
+    @tree.command(name = "distance", description = "Get Distance Between Two UBC Buildings")
+    async def third_command(interaction: discord.Interaction, code1: str, code2: str):
+        building_code1 = code1.upper()
+        building_code2 = code2.upper()
+        building_api1 = f'https://mg3xyuefal.execute-api.us-east-2.amazonaws.com/ubcbuildings/building?code={building_code1}'
+        building_api2 = f'https://mg3xyuefal.execute-api.us-east-2.amazonaws.com/ubcbuildings/building?code={building_code2}'
+        request1 = requests.get(building_api1)
+        request2 = requests.get(building_api2)
+        if request1.status_code == 200 and request2.status_code == 200:
+            building1_json = json.loads(request1.content)
+            building2_json = json.loads(request2.content)
+            name1 = building1_json['name']
+            address1 = building1_json['address']
+
+            name2 = building2_json['name']
+            address2 = building2_json['address']
+            
+            maps_api = f'https://maps.googleapis.com/maps/api/distancematrix/json?origins={address1.replace(" ", "+")}+Vancouver,+BC&destinations={address2.replace(" ", "+")}+Vancouver,+BC&units=metric&mode=walking&key={config.MAPS_KEY}'
+            
+            maps_request = requests.get(maps_api)
+            route = json.loads(maps_request.content)
+            time = route['rows'][0]['elements'][0]['duration']['text']
+            maps_link = f'https://www.google.com/maps/dir/?api=1&origin={address1.replace(" ", "+")}+Vancouver,+BC&destination={address2.replace(" ", "+")}+Vancouver,+BC&travelmode=walking'
+        
+            await interaction.response.send_message(
+                    embed=discord.Embed(
+                        title=f'{building_code1} --> {building_code2}',
+                        description=f'''
+                        {name1} to {name2}\n
+                        *Walking time: {time}*\n
+                        [See more on Google Maps]({maps_link})''',
+                    )
+            )
+        
+        else:
+            not_found = "The following building code"
+            if request1.status_code != 200 and request2.status_code != 200:
+                not_found += f's were not found: {building_code1}, {building_code2}'
+            elif request1.status_code != 200:
+                not_found += f' was not found: {building_code1}'
+            else:
+                not_found += f' was not found: {building_code2}'
+
+
+            await interaction.response.send_message(
+                embed=discord.Embed
+                (
+                    title=f"Unable to find route!",
+                    description = not_found
                 ))
 
 
