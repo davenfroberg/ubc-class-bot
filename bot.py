@@ -7,11 +7,12 @@ import json
 import asyncio
 import config
 import ratemyprofessor as rmp
-
+import cache
 
 def run_discord_bot():
     TOKEN = config.TOKEN
     prof_cache = {}
+    pcache = cache.Cache(max_size=5)
 
     session = '2022W' #to get first section in this session
     school_name = "University of British Columbia"
@@ -86,11 +87,19 @@ def run_discord_bot():
             prof_name = name.lower()
 
             #if the query is already cached, don't make a slow API call again
-            if prof_name in prof_cache:
-                professors = prof_cache.get(prof_name)
+            if pcache.contains(prof_name):
+                print("contains!")
+                professors = pcache.get(prof_name)
             else:
-                professors = rmp.get_professors_by_school_and_name(school, prof_name) #this is a very slow API call
-                prof_cache[prof_name] = professors #cache the api result by search term to prevent slow api calls in future
+                print("doesn't contain!")
+                professors = rmp.get_professors_by_school_and_name(school, prof_name)
+                pcache.set(prof_name, professors)
+           
+            #if prof_name in prof_cache:
+            #    professors = prof_cache.get(prof_name)
+            #else:
+            #    professors = rmp.get_professors_by_school_and_name(school, prof_name) #this is a very slow API call
+            #    prof_cache[prof_name] = professors #cache the api result by search term to prevent slow api calls in future
             
             professors = list(filter(lambda x: x.school.name == school_name, professors)) #filter out any profs that don't go to the proper school
             
@@ -138,6 +147,8 @@ def run_discord_bot():
             print(e)
             print(f'Error looking up {name}')
             await interaction.followup.send(f'There was an internal error! Please try again!')
+        
+        pcache.list_keys()
     
     @tree.command(name = "building", description = "Get Information on a UBC Building")
     async def third_command(interaction: discord.Interaction, code: str):
