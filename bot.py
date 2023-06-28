@@ -11,8 +11,7 @@ import cache
 
 def run_discord_bot():
     TOKEN = config.TOKEN
-    prof_cache = {}
-    pcache = cache.Cache(max_size=5)
+    prof_cache = cache.Cache()
 
     session = '2022W' #to get first section in this session
     school_name = "University of British Columbia"
@@ -42,7 +41,7 @@ def run_discord_bot():
             title = api_json['course_title']
             ssc = f'https://courses.students.ubc.ca/cs/courseschedule?pname=subjarea&tname=subj-course&dept={code}&course={course_number}'
             
-            #ubcgrades no longer has the overall section so it puts you on the first available section
+            #ubcgrades no longer has the overall section so it redirects you to the first available section
             ubc_grades = f'https://ubcgrades.com/#UBCV-{session}-{code}-{course_number}-{first_section}' 
 
             await interaction.response.send_message(
@@ -87,19 +86,11 @@ def run_discord_bot():
             prof_name = name.lower()
 
             #if the query is already cached, don't make a slow API call again
-            if pcache.contains(prof_name):
-                print("contains!")
-                professors = pcache.get(prof_name)
+            if prof_cache.contains(prof_name):
+                professors = prof_cache.get(prof_name)
             else:
-                print("doesn't contain!")
-                professors = rmp.get_professors_by_school_and_name(school, prof_name)
-                pcache.set(prof_name, professors)
-           
-            #if prof_name in prof_cache:
-            #    professors = prof_cache.get(prof_name)
-            #else:
-            #    professors = rmp.get_professors_by_school_and_name(school, prof_name) #this is a very slow API call
-            #    prof_cache[prof_name] = professors #cache the api result by search term to prevent slow api calls in future
+                professors = rmp.get_professors_by_school_and_name(school, prof_name) #this is a very slow API call
+                prof_cache.set(prof_name, professors) #cache the api result by search term to prevent slow API calls in future
             
             professors = list(filter(lambda x: x.school.name == school_name, professors)) #filter out any profs that don't go to the proper school
             
@@ -148,14 +139,14 @@ def run_discord_bot():
             print(f'Error looking up {name}')
             await interaction.followup.send(f'There was an internal error! Please try again!')
         
-        pcache.list_keys()
+        prof_cache.list_keys()
     
     @tree.command(name = "building", description = "Get Information on a UBC Building")
     async def third_command(interaction: discord.Interaction, code: str):
         building_code = code.upper()
         building_api = f'https://mg3xyuefal.execute-api.us-east-2.amazonaws.com/ubcbuildings/building?code={building_code}'
         request = requests.get(building_api)
-        print(request.status_code)
+        
         if request.status_code == 200:
             building_json = json.loads(request.content)
             name = building_json['name']
@@ -186,6 +177,7 @@ def run_discord_bot():
         building_api2 = f'https://mg3xyuefal.execute-api.us-east-2.amazonaws.com/ubcbuildings/building?code={building_code2}'
         request1 = requests.get(building_api1)
         request2 = requests.get(building_api2)
+        
         if request1.status_code == 200 and request2.status_code == 200:
             building1_json = json.loads(request1.content)
             building2_json = json.loads(request2.content)
@@ -221,14 +213,12 @@ def run_discord_bot():
             else:
                 not_found += f' was not found: {building_code2}'
 
-
             await interaction.response.send_message(
                 embed=discord.Embed
                 (
                     title=f"Unable to find route!",
                     description = not_found
                 ))
-
 
     @client.event
     async def on_ready():
