@@ -39,4 +39,4 @@ Thanks to these wonderful people for making UBC Class bot possible!
 <p align="center"><a href="https://github.com/davenfroberg/ubc-class-bot/graphs/contributors"><img src="https://contrib.rocks/image?repo=davenfroberg/ubc-class-bot" /></a></p>
 
 ## License
-This work currently does not list any license. As a default per copyright law, all rights are reserved.
+This work falls under the MIT license.
