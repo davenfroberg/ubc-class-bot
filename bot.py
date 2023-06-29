@@ -7,11 +7,11 @@ import json
 import asyncio
 import config
 import ratemyprofessor as rmp
-import cache
+import lru_cache
 
 def run_discord_bot():
     TOKEN = config.TOKEN
-    prof_cache = cache.Cache()
+    prof_cache = lru_cache.LRUCache()
 
     session = '2022W' #to get first section in this session
     school_name = "University of British Columbia"
@@ -24,7 +24,7 @@ def run_discord_bot():
     tree = app_commands.CommandTree(client)
 
     @tree.command(name = "course", description = "Get Info on a UBC Course")
-    async def first_command(interaction: discord.Interaction, course_code: str, course_number: str):
+    async def course_command(interaction: discord.Interaction, course_code: str, course_number: str):
         code = course_code.upper()
 
         grade_api = f'https://ubcgrades.com/api/v3/course-statistics/UBCV/{code}/{course_number}'
@@ -54,7 +54,7 @@ def run_discord_bot():
             await interaction.response.send_message(f"{code} {course_number} doesn't seem to exist!")
     
     @tree.command(name = "prof", description = "Get RateMyProfessors Info on a UBC Professor")
-    async def second_command(interaction: discord.Interaction, name: str):
+    async def prof_command(interaction: discord.Interaction, name: str):
         
         async def send_prof(interaction, professor, from_list=False):
             rating = "{:.1f}".format(professor.rating)
@@ -142,7 +142,7 @@ def run_discord_bot():
         prof_cache.list_keys()
     
     @tree.command(name = "building", description = "Get Information on a UBC Building")
-    async def third_command(interaction: discord.Interaction, code: str):
+    async def building_command(interaction: discord.Interaction, code: str):
         building_code = code.upper()
         building_api = f'https://mg3xyuefal.execute-api.us-east-2.amazonaws.com/ubcbuildings/building?code={building_code}'
         request = requests.get(building_api)
@@ -170,7 +170,7 @@ def run_discord_bot():
                 ))
             
     @tree.command(name = "distance", description = "Get Distance Between Two UBC Buildings")
-    async def third_command(interaction: discord.Interaction, code1: str, code2: str):
+    async def distance_command(interaction: discord.Interaction, code1: str, code2: str):
         building_code1 = code1.upper()
         building_code2 = code2.upper()
         building_api1 = f'https://mg3xyuefal.execute-api.us-east-2.amazonaws.com/ubcbuildings/building?code={building_code1}'

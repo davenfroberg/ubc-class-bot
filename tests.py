@@ -1,13 +1,13 @@
-import cache
+import lru_cache
 
 def test_cache_get_set():
-    c = cache.Cache()
+    c = lru_cache.LRUCache()
     c.set('test', 1)
     assert c.get('test') == 1
     assert c.length() == 1
 
 def test_cache_fill():
-    c = cache.Cache(3)
+    c = lru_cache.LRUCache(3)
     c.set('test1', 1)
     c.set('test2', 2)
     c.set('test3', 3)
@@ -20,7 +20,7 @@ def test_cache_fill():
     assert c.contains('test1') == False
 
 def test_cache_lru():
-    c = cache.Cache(3)
+    c = lru_cache.LRUCache(3)
     c.set('test1', 1)
     c.set('test2', 2)
     c.set('test1', 1)
