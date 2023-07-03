@@ -182,17 +182,17 @@ def run_discord_bot():
             building1_json = json.loads(request1.content)
             building2_json = json.loads(request2.content)
             name1 = building1_json['name']
-            address1 = building1_json['address']
+            address1 = f'{building1_json["address"].replace(" ", "+")}+Vancouver,+BC'
 
             name2 = building2_json['name']
-            address2 = building2_json['address']
+            address2 = f'{building2_json["address"].replace(" ", "+")}+Vancouver,+BC'
             
-            maps_api = f'https://maps.googleapis.com/maps/api/distancematrix/json?origins={address1.replace(" ", "+")}+Vancouver,+BC&destinations={address2.replace(" ", "+")}+Vancouver,+BC&units=metric&mode=walking&key={config.MAPS_KEY}'
+            maps_api = f'https://maps.googleapis.com/maps/api/distancematrix/json?origins={address1}&destinations={address2}&units=metric&mode=walking&key={config.MAPS_KEY}'
             
             maps_request = requests.get(maps_api)
             route = json.loads(maps_request.content)
             time = route['rows'][0]['elements'][0]['duration']['text']
-            maps_link = f'https://www.google.com/maps/dir/?api=1&origin={address1.replace(" ", "+")}+Vancouver,+BC&destination={address2.replace(" ", "+")}+Vancouver,+BC&travelmode=walking'
+            maps_link = f'https://www.google.com/maps/dir/?api=1&origin={address1}&destination={address2}&travelmode=walking'
         
             await interaction.response.send_message(
                     embed=discord.Embed(

@@ -4,7 +4,7 @@ class LRUCache(OrderedDict):
         self.size = max_size
         super().__init__()
     
-    #upholds LRU cache strategy by moving items in the dictionary to the front when set
+    #upholds LRU cache strategy by moving items in the dictionary to the end when set
     def set(self, k, v):
         super().__setitem__(k, v)
         super().move_to_end(k)
