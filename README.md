@@ -1,4 +1,4 @@
-<h1 align="center">UBC Class bot</h1>
+<h1 align="center">UBC Info bot</h1>
 
 
 <p align="center">
@@ -9,8 +9,8 @@
   <img alt="badge-codesize" src="https://img.shields.io/github/languages/code-size/davenfroberg/ubc-class-bot?style=for-the-badge">
 </p>
 
-## What is UBC Class bot?
-UBC Class Bot is a Discord bot for UBC's class Discord server. It provides miscelaneous information about UBC like information about courses, professors, and buildings.
+## What is UBC Info bot?
+UBC Info Bot is a Discord bot for UBC Discord servers. It provides miscelaneous information about UBC like information about courses, professors, buildings, and routes.
 
 ### Platforms
 - Discord
@@ -34,7 +34,7 @@ To setup a development environment for the application, you can follow the next 
     4. Run the bot using `python bot.py`.
 
 ## Contributors
-Thanks to these wonderful people for making UBC Class bot possible!
+Thanks to these wonderful people for making UBC Info bot possible!
 
 <p align="center"><a href="https://github.com/davenfroberg/ubc-class-bot/graphs/contributors"><img src="https://contrib.rocks/image?repo=davenfroberg/ubc-class-bot" /></a></p>
 
