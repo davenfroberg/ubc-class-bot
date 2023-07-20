@@ -173,8 +173,8 @@ def run_discord_bot():
     async def distance_command(interaction: discord.Interaction, code1: str, code2: str):
         building_code1 = code1.upper()
         building_code2 = code2.upper()
-        building_api1 = f'https://mg3xyuefal.execute-api.us-east-2.amazonaws.com/ubcbuildings/building?code={building_code1}'
-        building_api2 = f'https://mg3xyuefal.execute-api.us-east-2.amazonaws.com/ubcbuildings/building?code={building_code2}'
+        building_api1 = f'https://mg3xyuefal.execute-api.us-east-2.amazonaws.com/ubcbuildings/buildings?code={building_code1}'
+        building_api2 = f'https://mg3xyuefal.execute-api.us-east-2.amazonaws.com/ubcbuildings/buildings?code={building_code2}'
         request1 = requests.get(building_api1)
         request2 = requests.get(building_api2)
         
