@@ -139,7 +139,6 @@ def run_discord_bot():
             print(f'Error looking up {name}')
             await interaction.followup.send(f'There was an internal error! Please try again!')
         
-        prof_cache.list_keys()
     
     @tree.command(name = "building", description = "Get Information on a UBC Building")
     async def building_command(interaction: discord.Interaction, code: str):
