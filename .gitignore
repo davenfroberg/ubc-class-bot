@@ -26,6 +26,9 @@ pip-delete-this-directory.txt
 
 config.py
 
+# Outputs
+*.out
+
 # venvs
 
 venv/**
