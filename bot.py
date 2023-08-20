@@ -14,7 +14,7 @@ def run_discord_bot():
     prof_cache = lru_cache.LRUCache()
 
     session = '2022W' #to get first section in this session
-    school_name = "University of British Columbia"
+    school_name = "University of British Columbia" #change this to the name of your school
     school = rmp.get_school_by_name(school_name)
 
     intents = discord.Intents.default()  
