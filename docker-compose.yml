@@ -1,0 +1,12 @@
+services:
+  bot:
+    image: botimg
+    networks:
+      - ubcbot
+  building-api:
+    image: buildingimg
+    networks:
+      - ubcbot
+
+networks:
+  ubcbot:

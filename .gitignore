@@ -24,7 +24,7 @@ var/
 pip-log.txt
 pip-delete-this-directory.txt
 
-config.py
+bot/config.py
 
 # Outputs
 *.out
@@ -33,3 +33,7 @@ config.py
 
 venv/**
 venv/
+
+.DS_Store
+.idea/
+.pytest_cache/
