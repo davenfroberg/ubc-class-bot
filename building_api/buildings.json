@@ -5,7 +5,7 @@
         "address": "1822 East Mall"
     },
     {
-        "name": "Anthropology and Sociology",
+        "name": "Anthropology and Sociology Building",
         "code": "ANSO",
         "address": "6303 North West Marine Drive"
     },
@@ -30,12 +30,12 @@
         "address": "6373 University Boulevard"
     },
     {
-        "name": "Biological Sciences",
+        "name": "Biological Sciences Building",
         "code": "BIOL",
         "address": "6270 University Boulevard"
     },
     {
-        "name": "Buchanan",
+        "name": "Buchanan Building",
         "code": "BUCH",
         "address": "1866 Main Mall"
     },
@@ -70,12 +70,12 @@
         "address": "2360 East Mall V6T 1Z3"
     },
     {
-        "name": "Chemistry",
+        "name": "Chemistry Building",
         "code": "CHEM",
         "address": "2036 Main Mall"
     },
     {
-        "name": "Civil and Mechanical Engineering",
+        "name": "Civil and Mechanical Engineering Building",
         "code": "CEME",
         "address": "6250 Applied Science Lane"
     },
@@ -85,7 +85,7 @@
         "address": "2332 West Mall"
     },
     {
-        "name": "D.H. Copp",
+        "name": "D.H. Copp Building",
         "code": "COPP",
         "address": "2146 Health Sciences Mall"
     },
@@ -100,12 +100,12 @@
         "address": "6361 University Blvd"
     },
     {
-        "name": "Douglas Kenny",
+        "name": "Douglas Kenny Building",
         "code": "KENN",
         "address": "2136 West Mall"
     },
     {
-        "name": "Earth and Ocean Sciences",
+        "name": "Earth and Ocean Sciences Building",
         "code": "EOS",
         "address": "6339 Stores Road"
     },
@@ -120,7 +120,7 @@
         "address": "2335 Engineering Road"
     },
     {
-        "name": "Food, Nutrition and Health",
+        "name": "Food, Nutrition and Health Building",
         "code": "FNH",
         "address": "2205 East Mall"
     },
@@ -130,12 +130,12 @@
         "address": "2424 Main Mall"
     },
     {
-        "name": "Frank Forward",
+        "name": "Frank Forward Building",
         "code": "FORW",
         "address": "6350 Stores Road"
     },
     {
-        "name": "Frederic Lasserre",
+        "name": "Frederic Lasserre Building",
         "code": "LASR",
         "address": "6333 Memorial Road"
     },
@@ -150,27 +150,27 @@
         "address": "2177 Wesbrook Mall V6T 1Z3"
     },
     {
-        "name": "Geography",
+        "name": "Geography Building",
         "code": "GEOG",
         "address": "1984 West Mall"
     },
     {
-        "name": "George Cunningham",
+        "name": "George Cunningham Building",
         "code": "CUNN",
         "address": "2146 East Mall"
     },
     {
-        "name": "Hebb",
+        "name": "Hebb Building",
         "code": "HEBB",
         "address": "2045 East Mall"
     },
     {
-        "name": "Hennings",
+        "name": "Hennings Building",
         "code": "HENN",
         "address": "6224 Agricultural Road"
     },
     {
-        "name": "Henry Angus",
+        "name": "Henry Angus Building",
         "code": "ANGU",
         "address": "2053 Main Mall"
     },
@@ -195,7 +195,7 @@
         "address": "1961 East Mall V6T 1Z1"
     },
     {
-        "name": "J.B. MacDonald",
+        "name": "J.B. MacDonald Building",
         "code": "MCDN",
         "address": "2199 West Mall"
     },
@@ -225,17 +225,17 @@
         "address": "2350 Health Sciences Mall"
     },
     {
-        "name": "MacLeod",
+        "name": "MacLeod Building",
         "code": "MCLD",
         "address": "2356 Main Mall"
     },
     {
-        "name": "MacMillan",
+        "name": "MacMillan Building",
         "code": "MCML",
         "address": "2357 Main Mall"
     },
     {
-        "name": "Mathematics",
+        "name": "Mathematics Building",
         "code": "MATH",
         "address": "1984 Mathematics Road"
     },
@@ -255,12 +255,12 @@
         "address": "2185 East Mall"
     },
     {
-        "name": "Music",
+        "name": "Music Building",
         "code": "MUSC",
         "address": "6361 Memorial Road"
     },
     {
-        "name": "Neville Scarfe",
+        "name": "Neville Scarfe Building",
         "code": "SCRF",
         "address": "2125 Main Mall"
     },
@@ -340,7 +340,7 @@
         "address": "2345 East Mall"
     },
     {
-        "name": "Wesbrook",
+        "name": "Wesbrook Building",
         "code": "WESB",
         "address": "6174 University Boulevard"
     },
