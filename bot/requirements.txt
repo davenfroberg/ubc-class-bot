@@ -16,3 +16,4 @@ requests==2.32.2
 soupsieve==2.5
 urllib3==2.2.1
 yarl==1.9.4
+redis==5.0.4

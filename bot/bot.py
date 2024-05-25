@@ -8,6 +8,7 @@ import asyncio
 import config
 import ratemyprofessor as rmp
 import lru_cache
+import redis
 
 
 def run_discord_bot():
@@ -21,6 +22,8 @@ def run_discord_bot():
     intents = discord.Intents.default()
     intents.message_content = True
     client = discord.Client(intents=intents)
+
+    cache = redis.Redis(host='redis', port=6379, decode_responses=True)
 
     tree = app_commands.CommandTree(client)
 
@@ -84,12 +87,11 @@ def run_discord_bot():
             prof_name = name.lower()
 
             # if the query is already cached, don't make a slow API call again
-            if prof_cache.contains(prof_name):
-                professors = prof_cache.get(prof_name)
+            if cache.exists(prof_name):
+                professors = cache.get(prof_name)
             else:
-                professors = rmp.get_professors_by_school_and_name(school, prof_name)  # this is a very slow API call
-                prof_cache.set(prof_name,
-                               professors)  # cache the api result by search term to prevent slow API calls in future
+                professors = rmp.get_professors_by_school_and_name(school, prof_name)
+                cache.set(prof_name, professors)
 
             professors = list(filter(lambda x: x.school.name == school_name,
                                      professors))  # filter out any profs that don't go to the proper school

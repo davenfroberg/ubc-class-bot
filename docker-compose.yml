@@ -7,6 +7,10 @@ services:
     image: buildingimg
     networks:
       - ubcbot
+  redis:
+    image: redis
+    networks:
+      - ubcbot
 
 networks:
   ubcbot:
